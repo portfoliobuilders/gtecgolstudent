@@ -53,12 +53,11 @@ class StudentLMSHomePage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 16),
             child: CircleAvatar(
-              backgroundColor:
-                  const Color.fromARGB(255, 66, 142, 228), // Updated to a blue theme
+              backgroundColor: const Color.fromARGB(255, 66, 142, 228),
               radius: 22,
               child: PopupMenuButton<String>(
                 icon: const Icon(Icons.person_outline, color: Colors.white, size: 24),
-                color: const Color(0xFFE3F2FD), // Light blue background for the dropdown
+                color: const Color(0xFFE3F2FD),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -85,8 +84,7 @@ class StudentLMSHomePage extends StatelessWidget {
                         SizedBox(width: 10),
                         Text(
                           'Profile',
-                          style:
-                              TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -100,8 +98,7 @@ class StudentLMSHomePage extends StatelessWidget {
                         SizedBox(width: 10),
                         Text(
                           'Logout',
-                          style:
-                              TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -281,7 +278,6 @@ class _SplitViewState extends State<SplitView> {
     );
   }
 }
-
 
 class LiveSessionsList extends StatelessWidget {
   final StudentModel course;
