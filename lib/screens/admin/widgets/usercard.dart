@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AdminUserCard extends StatelessWidget {
   final String userId;
 
-  AdminUserCard({required this.userId});
+  const AdminUserCard({super.key, required this.userId});
 
   @override
   Widget build(BuildContext context) {

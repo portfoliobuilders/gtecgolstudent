@@ -9,6 +9,8 @@ import 'package:gtec/screens/admin/widgets/searchfiled.dart';
 import 'package:gtec/screens/admin/widgets/sidebarbutton.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
+  const AdminDashboardScreen({super.key});
+
   @override
   _AdminDashboardScreenState createState() => _AdminDashboardScreenState();
 }
@@ -78,7 +80,7 @@ class Sidebar extends StatelessWidget {
   final bool isLargeScreen;
   final String currentRoute;
 
-  Sidebar({
+  const Sidebar({super.key, 
     required this.onNavigate,
     required this.searchController,
     required this.isLargeScreen,
@@ -141,7 +143,7 @@ class ContentArea extends StatelessWidget {
   final TextEditingController searchController;
   final bool isLargeScreen;
 
-  const ContentArea({
+  const ContentArea({super.key, 
     required this.currentRoute,
     required this.searchController,
     required this.isLargeScreen,
@@ -192,7 +194,7 @@ class AdminMainMenu extends StatelessWidget {
   final bool isLargeScreen;
   final String currentRoute;
 
-  AdminMainMenu({
+  const AdminMainMenu({super.key, 
     required this.onNavigate,
     required this.isLargeScreen,
     required this.currentRoute,

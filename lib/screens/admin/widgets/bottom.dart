@@ -6,10 +6,10 @@ class AdminBottom extends StatefulWidget {
   final bool isLargeScreen;
 
   const AdminBottom({
-    Key? key,
+    super.key,
     required this.onMenuItemSelected,
     required this.isLargeScreen,
-  }) : super(key: key);
+  });
 
   @override
   _BottomState createState() => _BottomState();

@@ -3,7 +3,6 @@ import 'package:gtec/models/student_model.dart';
 import 'package:gtec/provider/student_provider.dart';
 import 'package:gtec/screens/student/studentlogin.dart';
 import 'package:gtec/screens/student/widgets/assignmentscreen.dart';
-import 'package:gtec/screens/student/widgets/studentprofile.dart';
 import 'package:gtec/screens/student/widgets/user_quiz.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,32 +17,32 @@ class StudentLMSHomePage extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 1,
         title: Row(
-  children: [
-    Container(
-      height: 35,
-      width: 75,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        image: DecorationImage(
-          image: AssetImage('assets/golblack.png'), // Replace with your asset path
-          fit: BoxFit.cover,
+          children: [
+            Container(
+              height: 35,
+              width: 75,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                image: const DecorationImage(
+                  image: AssetImage('assets/golblack.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Container(
+              height: 35,
+              width: 35,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(4),
+                image: const DecorationImage(
+                  image: AssetImage('assets/gtecwhite.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
-    ),
-    const SizedBox(width: 8), // Spacing between images
-    Container(
-      height: 35,
-      width: 35,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(4),
-        image: DecorationImage(
-          image: AssetImage('assets/gtecwhite.png'), // Replace with your asset path
-          fit: BoxFit.cover,
-        ),
-      ),
-    ),
-  ],
-),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications_outlined,
@@ -51,72 +50,66 @@ class StudentLMSHomePage extends StatelessWidget {
             onPressed: () {},
           ),
           const SizedBox(width: 8),
-      Container(
-  margin: const EdgeInsets.only(right: 16),
-  child: CircleAvatar(
-    backgroundColor: const Color.fromARGB(255, 66, 142, 228), // Updated to a blue theme
-    radius: 22, // Slightly larger for better appearance
-    child: PopupMenuButton<String>(
-      icon: const Icon(Icons.person_outline, color: Colors.white, size: 24),
-      color: const Color(0xFFE3F2FD), // Light blue background for the dropdown
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12), // Rounded edges for the dropdown
-      ),
-      onSelected: (String value) async {
-        if (value == 'Profile') {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => StudentProfileScreen(),
-          //   ),
-          // );
-        } else if (value == 'Logout') {
-          // Logout logic
-          await Provider.of<StudentAuthProvider>(context, listen: false).logout();
-
-          // Navigate to the login screen
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => UserLoginScreen()),
-          );
-        }
-      },
-      itemBuilder: (BuildContext context) => [
-        PopupMenuItem<String>(
-          value: 'Profile',
-          child: Row(
-            children: [
-              Icon(Icons.person, color: const Color.fromARGB(255, 75, 132, 198)), // Blue icon
-              const SizedBox(width: 10),
-              const Text(
-                'Profile',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          Container(
+            margin: const EdgeInsets.only(right: 16),
+            child: CircleAvatar(
+              backgroundColor:
+                  const Color.fromARGB(255, 66, 142, 228), // Updated to a blue theme
+              radius: 22,
+              child: PopupMenuButton<String>(
+                icon: const Icon(Icons.person_outline, color: Colors.white, size: 24),
+                color: const Color(0xFFE3F2FD), // Light blue background for the dropdown
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                onSelected: (String value) async {
+                  if (value == 'Profile') {
+                    // Profile logic
+                  } else if (value == 'Logout') {
+                    // Logout logic
+                    await Provider.of<StudentAuthProvider>(context, listen: false)
+                        .logout();
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => UserLoginScreen()),
+                    );
+                  }
+                },
+                itemBuilder: (BuildContext context) => [
+                  PopupMenuItem<String>(
+                    value: 'Profile',
+                    child: Row(
+                      children: const [
+                        Icon(Icons.person,
+                            color: Color.fromARGB(255, 75, 132, 198)),
+                        SizedBox(width: 10),
+                        Text(
+                          'Profile',
+                          style:
+                              TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem<String>(
+                    value: 'Logout',
+                    child: Row(
+                      children: const [
+                        Icon(Icons.logout_rounded,
+                            color: Color.fromARGB(255, 71, 132, 203)),
+                        SizedBox(width: 10),
+                        Text(
+                          'Logout',
+                          style:
+                              TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-        PopupMenuItem<String>(
-          value: 'Logout',
-          child: Row(
-            children: [
-              Icon(Icons.logout_rounded, color: const Color.fromARGB(255, 71, 132, 203)), // Blue icon
-              const SizedBox(width: 10),
-              const Text(
-                'Logout',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  ),
-),
-
-
-
-
-
         ],
       ),
       body: const SplitView(),
@@ -135,9 +128,13 @@ class _SplitViewState extends State<SplitView> {
   StudentModel? selectedCourse;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  bool isLargeScreen(BuildContext context) {
+    return MediaQuery.of(context).size.width >= 768; // Define breakpoint
+  }
+
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 768;
+    final isLarge = isLargeScreen(context);
 
     Widget buildCoursesList() {
       return SizedBox(
@@ -153,7 +150,7 @@ class _SplitViewState extends State<SplitView> {
               setState(() {
                 selectedCourse = course;
               });
-              if (isMobile) {
+              if (!isLarge) {
                 Navigator.of(context).pop();
               }
             },
@@ -202,7 +199,7 @@ class _SplitViewState extends State<SplitView> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            if (isMobile)
+                            if (!isLarge)
                               Padding(
                                 padding: const EdgeInsets.only(top: 8),
                                 child: TextButton.icon(
@@ -224,28 +221,17 @@ class _SplitViewState extends State<SplitView> {
       );
     }
 
-    if (isMobile) {
+    if (!isLarge) {
       return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
           title: Text(
             selectedCourse?.courseName ?? 'Select a Course',
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           elevation: 0,
           backgroundColor: Colors.white,
           foregroundColor: Colors.black87,
-          actions: [
-            if (selectedCourse != null)
-              IconButton(
-                icon: const Icon(Icons.refresh),
-                onPressed: () {
-                  // Add refresh functionality
-                },
-              ),
-          ],
         ),
         drawer: Drawer(
           child: Column(
@@ -285,7 +271,6 @@ class _SplitViewState extends State<SplitView> {
       );
     }
 
-    // Desktop layout
     return Scaffold(
       body: Row(
         children: [
@@ -296,32 +281,6 @@ class _SplitViewState extends State<SplitView> {
     );
   }
 }
-
-// Optional: Add this AnimatedContainer wrapper for smooth transitions
-class ResponsiveWrapper extends StatelessWidget {
-  final Widget child;
-  final double breakpoint;
-
-  const ResponsiveWrapper({
-    super.key,
-    required this.child,
-    this.breakpoint = 768,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          child: child,
-        );
-      },
-    );
-  }
-}
-
 
 
 class LiveSessionsList extends StatelessWidget {

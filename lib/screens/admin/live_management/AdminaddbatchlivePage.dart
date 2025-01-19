@@ -9,10 +9,10 @@ class AdminAddLiveToBatchPage extends StatefulWidget {
   final int batchId;
 
   const AdminAddLiveToBatchPage({
-    Key? key,
+    super.key,
     required this.courseId,
     required this.batchId,
-  }) : super(key: key);
+  });
 
   @override
   State<AdminAddLiveToBatchPage> createState() => _AdminAddLiveToBatchPageState();
@@ -104,16 +104,10 @@ class _AdminAddLiveToBatchPageState extends State<AdminAddLiveToBatchPage> {
                           'No live link provided.',
                           style: TextStyle(fontSize: 16, color: Colors.red),
                         ),
-                      if (liveLink.liveStartTime != null)
-                        Text(
-                          'Start Time: ${DateFormat('MMM dd, yyyy HH:mm').format(liveLink.liveStartTime!)}',
-                          style: const TextStyle(fontSize: 16),
-                        )
-                      else
-                        const Text(
-                          'No start time provided.',
-                          style: TextStyle(fontSize: 16, color: Colors.red),
-                        ),
+                      Text(
+                        'Start Time: ${DateFormat('MMM dd, yyyy HH:mm').format(liveLink.liveStartTime!)}',
+                        style: const TextStyle(fontSize: 16),
+                      ),
                     ],
                   ),
                 ),
@@ -130,8 +124,7 @@ class CreateLiveLinkDialog extends StatefulWidget {
   final int courseId;
   final int batchId;
 
-  const CreateLiveLinkDialog(this.courseId, this.batchId, {Key? key})
-      : super(key: key);
+  const CreateLiveLinkDialog(this.courseId, this.batchId, {super.key});
 
   @override
   _CreateLiveLinkDialogState createState() => _CreateLiveLinkDialogState();

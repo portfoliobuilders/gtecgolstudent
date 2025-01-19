@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gtec/provider/authprovider.dart';
 import 'package:gtec/provider/student_provider.dart';
 import 'package:gtec/screens/student/studentlogin.dart';
-import 'package:gtec/splashscreen.dart';
 import 'package:provider/provider.dart';
 
 void main() {

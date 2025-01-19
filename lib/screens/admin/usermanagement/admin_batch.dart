@@ -8,8 +8,7 @@ import 'package:gtec/provider/authprovider.dart';
 class AdminCourseuserBatchScreen extends StatefulWidget {
   final int courseId;
 
-  const AdminCourseuserBatchScreen({Key? key, required this.courseId})
-      : super(key: key);
+  const AdminCourseuserBatchScreen({super.key, required this.courseId});
 
   @override
   State<AdminCourseuserBatchScreen> createState() => _AdminCourseuserBatchScreenState();

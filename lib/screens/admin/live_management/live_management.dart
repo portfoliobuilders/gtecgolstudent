@@ -4,7 +4,7 @@ import 'package:gtec/screens/admin/live_management/admin_livebatch.dart';
 import 'package:provider/provider.dart';
 
 class Adminlivemanagement extends StatefulWidget {
-  const Adminlivemanagement({Key? key}) : super(key: key);
+  const Adminlivemanagement({super.key});
 
   @override
   State<Adminlivemanagement> createState() => _AdminlivemanagementState();
@@ -17,14 +17,13 @@ class _AdminlivemanagementState extends State<Adminlivemanagement> {
     BuildContext context, {
     String? initialName,
     String? initialDescription,
-    int? courseId,
   }) {
-    final TextEditingController _nameController =
+    final TextEditingController nameController =
         TextEditingController(text: initialName);
-    final TextEditingController _descriptionController =
+    final TextEditingController descriptionController =
         TextEditingController(text: initialDescription);
 
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   }
 
   @override
@@ -83,7 +82,7 @@ class _AdminlivemanagementState extends State<Adminlivemanagement> {
                             ),
                           );
                         },
-                        child: Container(
+                        child: SizedBox(
                           width: 225,
                           height: 225,
                           child: Card(
@@ -94,7 +93,7 @@ class _AdminlivemanagementState extends State<Adminlivemanagement> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                   height: 150,
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.only(

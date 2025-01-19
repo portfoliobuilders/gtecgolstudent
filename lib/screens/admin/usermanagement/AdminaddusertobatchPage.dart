@@ -5,8 +5,7 @@ import 'package:provider/provider.dart';
 
 class AdminaddusertobatchPage extends StatefulWidget {
   const AdminaddusertobatchPage(
-      {Key? key, required this.courseId, required this.batchId})
-      : super(key: key);
+      {super.key, required this.courseId, required this.batchId});
 
   final int courseId;
   final int batchId;

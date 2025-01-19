@@ -9,7 +9,8 @@ class CreateLiveLinkDialog extends StatefulWidget {
 
 
 
-  const CreateLiveLinkDialog(this.courseId, this.batchId, {Key? key}) : super(key: key);
+  const CreateLiveLinkDialog(this.courseId, this.batchId, {super.key});
+  @override
   _CreateLiveLinkDialogState createState() => _CreateLiveLinkDialogState();
 }
 

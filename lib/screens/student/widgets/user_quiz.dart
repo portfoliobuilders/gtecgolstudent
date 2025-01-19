@@ -194,7 +194,7 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                         ),
                       ),
                     );
-                  }).toList(),
+                  }),
 
                   const SizedBox(height: 16),
                   if (!isAnswered)
@@ -239,7 +239,7 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
                   const SizedBox(height: 32),
                 ],
               );
-            }).toList(),
+            }),
           ],
         ),
       ),

@@ -694,7 +694,7 @@ Future<String> AdminpostLiveLink(
     },
     body: jsonEncode({
       'liveLink': liveLink,
-      'liveStartTime': liveStartTime != null ? liveStartTime.toUtc().toIso8601String() : null, // Convert DateTime to ISO 8601 string
+      'liveStartTime': liveStartTime?.toUtc().toIso8601String(), // Convert DateTime to ISO 8601 string
     }),
   );
 

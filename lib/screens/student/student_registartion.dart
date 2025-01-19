@@ -4,6 +4,8 @@ import 'package:gtec/screens/student/studentlogin.dart';
 import 'package:provider/provider.dart';
 
 class UserregisterScreen extends StatefulWidget {
+  const UserregisterScreen({super.key});
+
   @override
   State<UserregisterScreen> createState() => _UserregisterScreenState();
 }

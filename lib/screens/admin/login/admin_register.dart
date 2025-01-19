@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:gtec/provider/authprovider.dart';
 
 class AdminregisterScreen extends StatefulWidget {
+  const AdminregisterScreen({super.key});
+
   @override
   State<AdminregisterScreen> createState() => _AdminregisterScreenState();
 }

@@ -8,8 +8,7 @@ import 'package:gtec/provider/authprovider.dart';
 class AdminCourseBatchScreen extends StatefulWidget {
   final int courseId;
 
-  const AdminCourseBatchScreen({Key? key, required this.courseId})
-      : super(key: key);
+  const AdminCourseBatchScreen({super.key, required this.courseId});
 
   @override
   State<AdminCourseBatchScreen> createState() => _AdminCourseBatchScreenState();
@@ -405,8 +404,6 @@ void _showEditModuleDialog(BuildContext context, AdminCourseBatch module) {
                 ),
                 Spacer(),
                 ElevatedButton(
-                  child: const Text('Create Batch',
-                      style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue,
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
@@ -414,6 +411,8 @@ void _showEditModuleDialog(BuildContext context, AdminCourseBatch module) {
                         borderRadius: BorderRadius.circular(8)),
                   ),
                   onPressed: () => _showCreateBatchDialog(context),
+                  child: const Text('Create Batch',
+                      style: TextStyle(color: Colors.white)),
                 ),
               ],
             ),

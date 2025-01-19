@@ -5,7 +5,7 @@ import 'package:gtec/screens/admin/usermanagement/admin_batch.dart';
 import 'package:provider/provider.dart';
 
 class Adminusermanagement extends StatefulWidget {
-  const Adminusermanagement({Key? key}) : super(key: key);
+  const Adminusermanagement({super.key});
 
   @override
   State<Adminusermanagement> createState() => _AdminusermanagementState();
@@ -18,14 +18,13 @@ class _AdminusermanagementState extends State<Adminusermanagement> {
     BuildContext context, {
     String? initialName,
     String? initialDescription,
-    int? courseId,
   }) {
-    final TextEditingController _nameController =
+    final TextEditingController nameController =
         TextEditingController(text: initialName);
-    final TextEditingController _descriptionController =
+    final TextEditingController descriptionController =
         TextEditingController(text: initialDescription);
 
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   }
 
   @override
@@ -84,7 +83,7 @@ class _AdminusermanagementState extends State<Adminusermanagement> {
                             ),
                           );
                         },
-                        child: Container(
+                        child: SizedBox(
                           width: 225,
                           height: 225,
                           child: Card(
@@ -95,7 +94,7 @@ class _AdminusermanagementState extends State<Adminusermanagement> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                   height: 150,
                                   child: ClipRRect(
                                     borderRadius: const BorderRadius.only(

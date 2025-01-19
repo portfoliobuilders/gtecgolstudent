@@ -7,8 +7,7 @@ import 'package:provider/provider.dart';
 class AdminCreateBatchScreen extends StatefulWidget {
   final int courseId;
 
-  const AdminCreateBatchScreen({Key? key, required this.courseId})
-      : super(key: key);
+  const AdminCreateBatchScreen({super.key, required this.courseId});
 
   @override
   State<AdminCreateBatchScreen> createState() => _AdminCreateBatchScreenState();

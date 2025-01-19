@@ -21,11 +21,11 @@ class AdminAuthProvider with ChangeNotifier {
 
   final SuperAdminAPI _apiService = SuperAdminAPI();
 
-  Map<int, List<AdminModulemodel>> _courseModules = {};
+  final Map<int, List<AdminModulemodel>> _courseModules = {};
 
-  Map<int, List<AdminLessonmodel>> _moduleLessons = {};
+  final Map<int, List<AdminLessonmodel>> _moduleLessons = {};
 
- Map<int, AdminLiveModel> _liveBatch = {};
+ final Map<int, AdminLiveModel> _liveBatch = {};
 
   AdminLiveModel? getLiveSessionForBatch(int batchId) {
     return _liveBatch[batchId];

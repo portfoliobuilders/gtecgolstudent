@@ -9,6 +9,8 @@ class StudentProfileScreen extends StatelessWidget {
     "phoneNumber": "1234567890"
   };
 
+   StudentProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

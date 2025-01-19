@@ -6,7 +6,7 @@ class AdminSidebarButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool selected;
 
-  AdminSidebarButton({
+  const AdminSidebarButton({super.key, 
     required this.icon,
     required this.text,
     required this.onTap,

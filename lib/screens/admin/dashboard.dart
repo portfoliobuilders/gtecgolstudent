@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 
 class DashboardScreennew extends StatelessWidget {
-  const DashboardScreennew({Key? key}) : super(key: key);
+  const DashboardScreennew({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class DashboardScreennew extends StatelessWidget {
 }
 
 class ProjectMetricsRow extends StatelessWidget {
-  const ProjectMetricsRow({Key? key}) : super(key: key);
+  const ProjectMetricsRow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +78,13 @@ class MetricCard extends StatelessWidget {
   final Color textColor;
 
   const MetricCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.value,
     required this.subtitle,
     required this.color,
     required this.textColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +137,7 @@ class MetricCard extends StatelessWidget {
 }
 
 class RevenueChart extends StatelessWidget {
-  const RevenueChart({Key? key}) : super(key: key);
+  const RevenueChart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -254,7 +254,7 @@ class RevenueChart extends StatelessWidget {
 }
 
 class TransactionsSection extends StatelessWidget {
-  const TransactionsSection({Key? key}) : super(key: key);
+  const TransactionsSection({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -320,13 +320,13 @@ class TransactionItem extends StatelessWidget {
   final bool isPositive;
 
   const TransactionItem({
-    Key? key,
+    super.key,
     required this.name,
     required this.status,
     required this.date,
     required this.amount,
     required this.isPositive,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

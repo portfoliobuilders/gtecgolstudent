@@ -3,7 +3,7 @@ import 'package:gtec/provider/authprovider.dart';
 import 'package:provider/provider.dart';
 
 class AllUsersapprovePage extends StatefulWidget {
-  const AllUsersapprovePage({Key? key}) : super(key: key);
+  const AllUsersapprovePage({super.key});
 
   @override
   _AllUsersapprovePageState createState() => _AllUsersapprovePageState();

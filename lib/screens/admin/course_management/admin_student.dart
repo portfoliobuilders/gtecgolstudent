@@ -4,7 +4,7 @@ import 'package:gtec/screens/admin/batch_management/admin_batch_add.dart';
 import 'package:provider/provider.dart';
 
 class AdminAddStudent extends StatefulWidget {
-  const AdminAddStudent({Key? key}) : super(key: key);
+  const AdminAddStudent({super.key});
 
   @override
   State<AdminAddStudent> createState() => _AdminAddStudentState();
@@ -17,9 +17,9 @@ class _AdminAddStudentState extends State<AdminAddStudent> {
     String? initialDescription,
     int? courseId,
   }) {
-    final TextEditingController _nameController =
+    final TextEditingController nameController =
         TextEditingController(text: initialName);
-    final TextEditingController _descriptionController =
+    final TextEditingController descriptionController =
         TextEditingController(text: initialDescription);
 
     showDialog(
@@ -31,11 +31,11 @@ class _AdminAddStudentState extends State<AdminAddStudent> {
             child: Column(
               children: [
                 TextField(
-                  controller: _nameController,
+                  controller: nameController,
                   decoration: const InputDecoration(labelText: 'Course Name'),
                 ),
                 TextField(
-                  controller: _descriptionController,
+                  controller: descriptionController,
                   decoration: const InputDecoration(labelText: 'Description'),
                   maxLines: 3,
                 ),
@@ -49,8 +49,8 @@ class _AdminAddStudentState extends State<AdminAddStudent> {
             ),
             TextButton(
               onPressed: () async {
-                String courseName = _nameController.text.trim();
-                String courseDescription = _descriptionController.text.trim();
+                String courseName = nameController.text.trim();
+                String courseDescription = descriptionController.text.trim();
 
                 if (courseName.isNotEmpty && courseDescription.isNotEmpty) {
                   try {
@@ -129,8 +129,6 @@ class _AdminAddStudentState extends State<AdminAddStudent> {
                       ),
                       ElevatedButton(
                         onPressed: () => _showAddCourseDialog(context),
-                        child: const Text('Create Course',
-                            style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           padding: const EdgeInsets.symmetric(
@@ -138,6 +136,8 @@ class _AdminAddStudentState extends State<AdminAddStudent> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                         ),
+                        child: const Text('Create Course',
+                            style: TextStyle(color: Colors.white)),
                       ),
                     ],
                   ),
@@ -157,7 +157,7 @@ class _AdminAddStudentState extends State<AdminAddStudent> {
                             ),
                           );
                         },
-                        child: Container(
+                        child: SizedBox(
                           width: 200,
                           child: Card(
                             elevation: 6,

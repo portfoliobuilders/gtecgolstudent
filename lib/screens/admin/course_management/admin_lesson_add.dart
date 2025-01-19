@@ -12,13 +12,13 @@ class AdminModuleLessonsScreen extends StatefulWidget {
   final String courseName;
 
   const AdminModuleLessonsScreen({
-    Key? key,
+    super.key,
     required this.moduleId,
     required this.courseId,
     required this.batchId,
     required this.moduleTitle,
     required this.courseName,
-  }) : super(key: key);
+  });
 
   @override
   State<AdminModuleLessonsScreen> createState() =>
@@ -514,11 +514,11 @@ class _CreateLessonDialog extends StatefulWidget {
   final int moduleId;
 
   const _CreateLessonDialog({
-    Key? key,
+    super.key,
     required this.courseId,
     required this.batchId,
     required this.moduleId,
-  }) : super(key: key);
+  });
 
   @override
   State<_CreateLessonDialog> createState() => _CreateLessonDialogState();

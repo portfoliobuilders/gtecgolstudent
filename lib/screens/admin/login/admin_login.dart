@@ -5,6 +5,8 @@ import 'package:gtec/screens/student/studentlogin.dart';
 import 'package:provider/provider.dart';
 
 class AdminLoginScreen extends StatefulWidget {
+  const AdminLoginScreen({super.key});
+
   @override
   State<AdminLoginScreen> createState() => _AdminLoginScreenState();
 }

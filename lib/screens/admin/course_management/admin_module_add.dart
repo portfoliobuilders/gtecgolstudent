@@ -10,11 +10,11 @@ class AdminModuleAddScreen extends StatefulWidget {
   final String courseName;
 
   const AdminModuleAddScreen({
-    Key? key,
+    super.key,
     required this.courseId,
     required this.batchId,
     required this.courseName,
-  }) : super(key: key);
+  });
 
   @override
   State<AdminModuleAddScreen> createState() => _AdminModuleAddScreenState();

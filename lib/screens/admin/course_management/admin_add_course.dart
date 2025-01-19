@@ -5,7 +5,7 @@ import 'package:gtec/screens/admin/course_management/admin_module_add.dart';
 import 'package:provider/provider.dart';
 
 class AdminAddCourse extends StatefulWidget {
-  const AdminAddCourse({Key? key}) : super(key: key);
+  const AdminAddCourse({super.key});
 
   @override
   State<AdminAddCourse> createState() => _AdminAddCourseState();
@@ -20,12 +20,12 @@ void _showAddCourseDialog(
   String? initialDescription,
   int? courseId,
 }) {
-  final TextEditingController _nameController =
+  final TextEditingController nameController =
       TextEditingController(text: initialName);
-  final TextEditingController _descriptionController =
+  final TextEditingController descriptionController =
       TextEditingController(text: initialDescription);
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   showDialog(
     context: context,
@@ -43,13 +43,13 @@ void _showAddCourseDialog(
           width: 600, // Set the desired width
           child: SingleChildScrollView(
             child: Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SelectionContainer.disabled( // Disable text selection highlighting
                     child: TextFormField(
-                      controller: _nameController,
+                      controller: nameController,
                       decoration: InputDecoration(
                         labelText: 'Course Name',
                         border: OutlineInputBorder(
@@ -71,7 +71,7 @@ void _showAddCourseDialog(
                   const SizedBox(height: 16),
                   SelectionContainer.disabled( // Disable text selection highlighting
                     child: TextFormField(
-                      controller: _descriptionController,
+                      controller: descriptionController,
                       decoration: InputDecoration(
                         labelText: 'Description',
                         border: OutlineInputBorder(
@@ -119,10 +119,10 @@ void _showAddCourseDialog(
               Expanded(
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      String courseName = _nameController.text.trim();
+                    if (formKey.currentState!.validate()) {
+                      String courseName = nameController.text.trim();
                       String courseDescription =
-                          _descriptionController.text.trim();
+                          descriptionController.text.trim();
 
                       try {
                         final provider = Provider.of<AdminAuthProvider>(
@@ -217,8 +217,6 @@ void _showAddCourseDialog(
                       ),
                       ElevatedButton(
                         onPressed: () => _showAddCourseDialog(context),
-                        child: const Text('Create Course',
-                            style: TextStyle(color: Colors.white)),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue,
                           padding: const EdgeInsets.symmetric(
@@ -226,6 +224,8 @@ void _showAddCourseDialog(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                         ),
+                        child: const Text('Create Course',
+                            style: TextStyle(color: Colors.white)),
                       ),
                     ],
                   ),
@@ -248,7 +248,7 @@ void _showAddCourseDialog(
                               ),
                             );
                           },
-                          child: Container(
+                          child: SizedBox(
                               width: 225,
                               height: 225,
                               child: Card(
@@ -260,7 +260,7 @@ void _showAddCourseDialog(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           height: 150,
                                           child: ClipRRect(
                                             borderRadius:

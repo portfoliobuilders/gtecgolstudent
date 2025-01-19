@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AdminSearchField extends StatefulWidget {
   final TextEditingController searchController;
 
-  AdminSearchField({required this.searchController});
+  const AdminSearchField({super.key, required this.searchController});
 
   @override
   State<AdminSearchField> createState() => _AdminSearchFieldState();
