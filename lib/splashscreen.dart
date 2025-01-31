@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Future.microtask(() {
       final authProvider = Provider.of<StudentAuthProvider>(context, listen: false);
-      authProvider.checkAuth(context); // Check authentication status and navigate
+      authProvider.StudentcheckAuth(context); // Check authentication status and navigate
     });
 
     return Scaffold(

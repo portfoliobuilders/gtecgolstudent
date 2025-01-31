@@ -28,7 +28,7 @@ class _QuizDetailScreenState extends State<QuizDetailScreen> {
 
     try {
       final quizProvider = Provider.of<StudentAuthProvider>(context, listen: false);
-      await quizProvider.submitQuizProvider(
+      await quizProvider.StudentsubmitQuizProvider(
         answerId,
         widget.quiz.quizId,
         questionId,

@@ -18,6 +18,7 @@ class AssignmentSubmissionPage extends StatefulWidget {
 
 class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
   final TextEditingController _contentController = TextEditingController();
+  final TextEditingController _linkController = TextEditingController();
   bool isSubmitting = false;
   String errorMessage = '';
 
@@ -36,10 +37,10 @@ class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
 
     try {
       final provider = Provider.of<StudentAuthProvider>(context, listen: false);
-      await provider.submitAssignmentProvider(
+      await provider.StudentsubmitAssignmentProvider(
         widget.assignment.id,
         _contentController.text,
-        widget.assignment.submissionLink,
+        _linkController.text,
       );
       
       if (mounted) {
@@ -192,6 +193,48 @@ class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
                         contentPadding: const EdgeInsets.all(16),
                       ),
                     ),
+                    
+                    
+                    
+                  ),
+                   Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _linkController,
+                      maxLines: 8,
+                      decoration: InputDecoration(
+                        hintText: 'Enter your submission content here...',
+                        hintStyle: TextStyle(color: Colors.grey[400]),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.grey[200]!),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.grey[200]!),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: Colors.blue[400]!),
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: const EdgeInsets.all(16),
+                      ),
+                    ),
+                    
+                    
+                    
                   ),
                   if (errorMessage.isNotEmpty)
                     Padding(

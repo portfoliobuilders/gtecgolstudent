@@ -87,20 +87,19 @@ class StudentLessonModel {
   }
 }
 
-
 class StudentAssignmentModel {
   final int id;
   final String title;
   final String description;
   final String dueDate;
-  final String submissionLink;
+  final String? submissionLink; // Make it nullable
 
   StudentAssignmentModel({
     required this.id,
     required this.title,
     required this.description,
     required this.dueDate,
-    required this.submissionLink,
+    this.submissionLink, // Nullable field
   });
 
   factory StudentAssignmentModel.fromJson(Map<String, dynamic> json) {
@@ -109,7 +108,7 @@ class StudentAssignmentModel {
       title: json['title'],
       description: json['description'],
       dueDate: json['dueDate'],
-      submissionLink: json['submissionLink'],
+      submissionLink: json['submissionLink'] ?? "", // Provide default value
     );
   }
 }
@@ -132,23 +131,24 @@ class StudentQuizmodel {
     required this.moduleId,
     required this.batchId,
     required this.status,
-
     required this.questions,
   });
-factory StudentQuizmodel.fromJson(Map<String, dynamic> json) {
-  return StudentQuizmodel(
-    quizId: json['quizId'] ?? 0,  // Default to 0 if quizId is null
-    name: json['name'] ?? '',  // Default to an empty string if name is null
-    description: json['description'] ?? '',  // Default to an empty string if description is null
-    courseId: json['courseId'] ?? 0,  // Default to 0 if courseId is null
-    moduleId: json['moduleId'] ?? 0,  // Default to 0 if moduleId is null
-    batchId: json['batchId'] ?? 0,  // Default to 0 if batchId is null
-    status: json['status'] ?? '',  // Default to an empty string if status is null
-    questions: (json['questions'] as List)
-        .map((question) => Question.fromJson(question))
-        .toList(),
-  );
-}
+  factory StudentQuizmodel.fromJson(Map<String, dynamic> json) {
+    return StudentQuizmodel(
+      quizId: json['quizId'] ?? 0, // Default to 0 if quizId is null
+      name: json['name'] ?? '', // Default to an empty string if name is null
+      description: json['description'] ??
+          '', // Default to an empty string if description is null
+      courseId: json['courseId'] ?? 0, // Default to 0 if courseId is null
+      moduleId: json['moduleId'] ?? 0, // Default to 0 if moduleId is null
+      batchId: json['batchId'] ?? 0, // Default to 0 if batchId is null
+      status:
+          json['status'] ?? '', // Default to an empty string if status is null
+      questions: (json['questions'] as List)
+          .map((question) => Question.fromJson(question))
+          .toList(),
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -159,7 +159,6 @@ factory StudentQuizmodel.fromJson(Map<String, dynamic> json) {
       'moduleId': moduleId,
       'batchId': batchId,
       'status': status,
-
       'questions': questions.map((question) => question.toJson()).toList(),
     };
   }
@@ -235,8 +234,23 @@ class StudentLiveModel {
     return StudentLiveModel(
       message: json['message'] ?? '', // Handle null or missing values
       liveLink: json['liveLink'] ?? '', // Handle null or missing values
-      liveStartTime: DateTime.parse(json['liveStartTime']), // Parse String to DateTime
+      liveStartTime:
+          DateTime.parse(json['liveStartTime']), // Parse String to DateTime
     );
   }
 }
 
+class notoficationlivemodel {
+  final String message;
+  final String nnotifications;
+  notoficationlivemodel({
+    required this.message,
+    required this.nnotifications,
+  });
+  factory notoficationlivemodel.fromJson(Map<String, dynamic> json) {
+    return notoficationlivemodel(
+      message: json['message'] ?? '',
+      nnotifications: json['nnotifications'] ?? '',
+    );
+  }
+}
