@@ -5,7 +5,7 @@ import 'package:gtec/splashscreen.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-   FlutterError.onError = (FlutterErrorDetails details) {
+  FlutterError.onError = (FlutterErrorDetails details) {
     FlutterError.presentError(details);
     debugPrint(details.toString());
   };
@@ -17,17 +17,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => StudentAuthProvider()),
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => StudentAuthProvider(), // Provide only StudentAuthProvider here
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'GTEC LMS',
         theme: ThemeData(primarySwatch: Colors.blue),
-        home:  SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
 }
-

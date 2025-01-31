@@ -254,3 +254,60 @@ class notoficationlivemodel {
     );
   }
 }
+
+class UserProfileResponse {
+  final String message;
+  final UserProfile profile;
+
+  UserProfileResponse({required this.message, required this.profile});
+
+  factory UserProfileResponse.fromJson(Map<String, dynamic> json) {
+    return UserProfileResponse(
+      message: json['message'],
+      profile: UserProfile.fromJson(json['profile']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'message': message,
+      'profile': profile.toJson(),
+    };
+  }
+}
+
+class UserProfile {
+  final int userId; // Changed from id to userId to match API response
+  final String name;
+  final String email;
+  final String role;
+  final String phoneNumber;
+
+  UserProfile({
+    required this.userId, // Updated parameter name
+    required this.name,
+    required this.email,
+    required this.role,
+    required this.phoneNumber,
+  });
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return UserProfile(
+      userId: json['userId'], // Updated to match API response
+      name: json['name'],
+      email: json['email'],
+      role: json['role'],
+      phoneNumber: json['phoneNumber'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'userId': userId, // Updated field name
+      'name': name,
+      'email': email,
+      'role': role,
+      'phoneNumber': phoneNumber,
+    };
+  }
+}

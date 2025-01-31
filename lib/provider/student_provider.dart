@@ -36,10 +36,20 @@ void clearLessonAndAssignmentData() {
   int? get selectedCourseId => _courseId;
 
   String? _token;
-  int? _userId;
   int? _moduleId;
   int? _courseId;
   int? _batchId; // New variable to store batchId
+
+  int? _userId;
+  UserProfileResponse? _userProfile;
+
+  int? get userId => _userId;
+  UserProfileResponse? get userProfile => _userProfile;
+
+  void setUserId(int id) {
+    _userId = id;
+    notifyListeners();
+  }
 
   List<StudentModuleModel> _modules = [];
   List<StudentModuleModel> get modules => _modules;
@@ -53,6 +63,7 @@ void clearLessonAndAssignmentData() {
 
   List<StudentQuizmodel> _quiz = [];
   List<StudentQuizmodel> get quiz => _quiz;
+
 
   
   List<notoficationlivemodel> _notification = [];
@@ -74,6 +85,8 @@ void clearLessonAndAssignmentData() {
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         _token = responseData['token'];
+                  _userId = responseData['userId'];
+
 
         // Extract courses and batchId
         if (responseData['courses'] != null &&
@@ -311,6 +324,20 @@ void clearLessonAndAssignmentData() {
     } catch (error) {
       print('Failed to fetch live for course $_courseId: $error');
       throw Exception('Failed to fetch live');
+    }
+  }
+
+  Future<void> fetchUserProfileProvider(int userId) async {
+    if (_token == null) return;
+    
+    try {
+      final response = await _apiService.fetchUserProfile(_token!, userId);
+      _userProfile = response;
+      notifyListeners();
+    } catch (e) {
+      print('Error fetching user profile: $e');
+      _userProfile = null;
+      notifyListeners();
     }
   }
 }

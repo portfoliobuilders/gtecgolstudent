@@ -12,8 +12,7 @@ class AssignmentSubmissionPage extends StatefulWidget {
   });
 
   @override
-  State<AssignmentSubmissionPage> createState() =>
-      _AssignmentSubmissionPageState();
+  State<AssignmentSubmissionPage> createState() => _AssignmentSubmissionPageState();
 }
 
 class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
@@ -85,6 +84,7 @@ class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Assignment Header
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
@@ -109,7 +109,7 @@ class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
                       color: Color(0xFF464F60),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 16),
                   Row(
                     children: [
                       Container(
@@ -139,11 +139,41 @@ class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
                           ],
                         ),
                       ),
+                      const SizedBox(width: 12),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.green[50],
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.assignment_turned_in,
+                              size: 16,
+                              color: Colors.green[700],
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              'Open for Submission',
+                              style: TextStyle(
+                                color: Colors.green[700],
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
+
+            // Submission Form
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
@@ -158,7 +188,10 @@ class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
                     ),
                   ),
                   const SizedBox(height: 16),
+                  
+                  // Content Input
                   Container(
+                    margin: const EdgeInsets.only(bottom: 16),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
@@ -170,98 +203,125 @@ class _AssignmentSubmissionPageState extends State<AssignmentSubmissionPage> {
                         ),
                       ],
                     ),
-                    child: TextField(
-                      controller: _contentController,
-                      maxLines: 8,
-                      decoration: InputDecoration(
-                        hintText: 'Enter your submission content here...',
-                        hintStyle: TextStyle(color: Colors.grey[400]),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey[200]!),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey[200]!),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blue[400]!),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.all(16),
-                      ),
-                    ),
-                    
-                    
-                    
-                  ),
-                   Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: TextField(
-                      controller: _linkController,
-                      maxLines: 8,
-                      decoration: InputDecoration(
-                        hintText: 'Enter your submission content here...',
-                        hintStyle: TextStyle(color: Colors.grey[400]),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey[200]!),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.grey[200]!),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide(color: Colors.blue[400]!),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.all(16),
-                      ),
-                    ),
-                    
-                    
-                    
-                  ),
-                  if (errorMessage.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.red[50],
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: Colors.red[100]!),
-                        ),
-                        child: Row(
-                          children: [
-                            Icon(Icons.error_outline, color: Colors.red[700]),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                errorMessage,
-                                style: TextStyle(color: Colors.red[700]),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            children: [
+                              Icon(Icons.edit_note, color: Colors.blue[600]),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'Assignment Content',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF464F60),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
+                        const Divider(height: 1),
+                        TextField(
+                          controller: _contentController,
+                          maxLines: 8,
+                          decoration: InputDecoration(
+                            hintText: 'Enter your submission content here...',
+                            hintStyle: TextStyle(color: Colors.grey[400]),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: const EdgeInsets.all(16),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Link Input
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Row(
+                            children: [
+                              Icon(Icons.link, color: Colors.blue[600]),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'Additional Resources (Optional)',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0xFF464F60),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Divider(height: 1),
+                        TextField(
+                          controller: _linkController,
+                          maxLines: 3,
+                          decoration: InputDecoration(
+                            hintText: 'Add links to any additional resources...',
+                            hintStyle: TextStyle(color: Colors.grey[400]),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: const EdgeInsets.all(16),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Error Message
+                  if (errorMessage.isNotEmpty)
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.red[50],
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.red[100]!),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(Icons.error_outline, color: Colors.red[700]),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: Text(
+                              errorMessage,
+                              style: TextStyle(color: Colors.red[700]),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  const SizedBox(height: 24),
-                  SizedBox(
+
+                  // Submit Button
+                  Container(
+                    margin: const EdgeInsets.only(top: 8),
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(

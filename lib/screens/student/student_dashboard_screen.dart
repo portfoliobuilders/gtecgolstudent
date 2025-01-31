@@ -1,14 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gtec/models/student_model.dart';
 import 'package:gtec/provider/student_provider.dart';
 import 'package:gtec/screens/student/studentlogin.dart';
 import 'package:gtec/screens/student/widgets/assignmentscreen.dart';
+import 'package:gtec/screens/student/widgets/studentprofile.dart';
 import 'package:gtec/screens/student/widgets/user_quiz.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-// I'll first provide the StudentLMSHomePage and SplitView classes
-// Rest of the classes will follow - this will be a very long response
 
 class StudentLMSHomePage extends StatelessWidget {
   const StudentLMSHomePage({super.key});
@@ -25,18 +25,10 @@ class StudentLMSHomePage extends StatelessWidget {
               height: 35,
               width: 75,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
                 image: const DecorationImage(
                   image: AssetImage('assets/golblack.png'),
                   fit: BoxFit.cover,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
             ),
             const SizedBox(width: 12),
@@ -44,18 +36,10 @@ class StudentLMSHomePage extends StatelessWidget {
               height: 35,
               width: 35,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
                 image: const DecorationImage(
                   image: AssetImage('assets/gtecwhite.png'),
                   fit: BoxFit.cover,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
               ),
             ),
           ],
@@ -142,7 +126,17 @@ class StudentLMSHomePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               onSelected: (String value) async {
-                if (value == 'Logout') {
+                if (value == 'Profile') {
+                  showDialog(
+                    context: context,
+                    builder: (context) => Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: StudentProfileScreen(),
+                    ),
+                  );
+                } else if (value == 'Logout') {
                   await Provider.of<StudentAuthProvider>(context, listen: false)
                       .Studentlogout();
                   Navigator.pushReplacement(
@@ -153,6 +147,31 @@ class StudentLMSHomePage extends StatelessWidget {
                 }
               },
               itemBuilder: (BuildContext context) => [
+                PopupMenuItem<String>(
+                  value: 'Profile',
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: Colors.blue.shade50,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(Icons.person,
+                            color: Colors.blue.shade400, size: 20),
+                      ),
+                      const SizedBox(width: 12),
+                      const Text(
+                        'Profile',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 PopupMenuItem<String>(
                   value: 'Logout',
                   child: Row(
@@ -180,7 +199,7 @@ class StudentLMSHomePage extends StatelessWidget {
                 ),
               ],
             ),
-          ),
+          )
         ],
       ),
       body: Container(
@@ -647,9 +666,10 @@ class LiveSessionsList extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  _headerWidget(),
-                  const SizedBox(height: 16),
+                  // _headerWidget(context),
+                  // const SizedBox(height: 16),
                   _liveSessionsList(context, liveSessions),
                 ],
               ),
@@ -665,49 +685,68 @@ class LiveSessionsList extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.event_busy, size: 50, color: Colors.orange.shade400),
+          Icon(Icons.event_busy, 
+            size: 50, 
+            color: Colors.orange.shade400
+          ),
           const SizedBox(height: 12),
           Text(
             'No live sessions scheduled',
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
+            style: TextStyle(
+              fontSize: 16, 
+              color: Colors.grey.shade600
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _headerWidget() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.red.shade50, Colors.orange.shade50],
-        ),
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.red.shade100.withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: const [
-          Icon(Icons.live_tv, color: Colors.red, size: 24),
-          SizedBox(width: 12),
-          Text(
-            'Live Sessions',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _headerWidget(BuildContext context) {
+  //   final screenWidth = MediaQuery.of(context).size.width;
+  //   return Container(
+  //     padding: EdgeInsets.symmetric(
+  //       horizontal: screenWidth * 0.05,
+  //       vertical: 12,
+  //     ),
+  //     decoration: BoxDecoration(
+  //       gradient: LinearGradient(
+  //         colors: [Colors.red.shade50, Colors.orange.shade50],
+  //       ),
+  //       borderRadius: BorderRadius.circular(16),
+  //       boxShadow: [
+  //         BoxShadow(
+  //           color: Colors.red.shade100.withOpacity(0.3),
+  //           blurRadius: 8,
+  //           offset: const Offset(0, 2),
+  //         ),
+  //       ],
+  //     ),
+  //     child: Row(
+  //       mainAxisSize: MainAxisSize.min,
+  //       children: [
+  //         Icon(
+  //           Icons.live_tv,
+  //           color: Colors.red,
+  //           size: screenWidth * 0.06,
+  //         ),
+  //         SizedBox(width: screenWidth * 0.03),
+  //         Text(
+  //           'Live Sessions',
+  //           style: TextStyle(
+  //             fontSize: screenWidth * 0.05,
+  //             fontWeight: FontWeight.bold,
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _liveSessionsList(BuildContext context, List liveSessions) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      height: 90,
+      height: 120, // Fixed height for the list container
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: liveSessions.length,
@@ -719,13 +758,16 @@ class LiveSessionsList extends StatelessWidget {
     );
   }
 
-  Widget _liveSessionCard(BuildContext context, live) {
+  Widget _liveSessionCard(BuildContext context, dynamic live) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      width: MediaQuery.of(context).size.width * 0.75,
+      width: min(screenWidth * 0.8, 400), // Responsive width with maximum limit
       margin: const EdgeInsets.only(right: 16),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [Colors.blue.shade50, Colors.white]),
+        gradient: LinearGradient(
+          colors: [Colors.blue.shade50, Colors.white],
+        ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: Colors.blue.shade100, width: 2),
         boxShadow: [
@@ -739,7 +781,7 @@ class LiveSessionsList extends StatelessWidget {
       child: Row(
         children: [
           _liveIndicator(),
-          Expanded(child: _sessionDetails(live)),
+          Expanded(child: _sessionDetails(context, live)),
           _joinButton(context, live),
         ],
       ),
@@ -765,25 +807,36 @@ class LiveSessionsList extends StatelessWidget {
     );
   }
 
-  Widget _sessionDetails(live) {
+  Widget _sessionDetails(BuildContext context, dynamic live) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           live.message,
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: min(screenWidth * 0.04, 16),
+          ),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         const SizedBox(height: 6),
         Row(
           children: [
-            Icon(Icons.access_time, size: 18, color: Colors.blue.shade600),
+            Icon(
+              Icons.access_time,
+              size: min(screenWidth * 0.045, 18),
+              color: Colors.blue.shade600,
+            ),
             const SizedBox(width: 6),
             Text(
               live.liveStartTime.toString(),
-              style: TextStyle(color: Colors.blue.shade600, fontSize: 14),
+              style: TextStyle(
+                color: Colors.blue.shade600,
+                fontSize: min(screenWidth * 0.035, 14),
+              ),
             ),
           ],
         ),
@@ -791,26 +844,38 @@ class LiveSessionsList extends StatelessWidget {
     );
   }
 
-  Widget _joinButton(BuildContext context, live) {
-    return ElevatedButton.icon(
-      onPressed: () {
-        if (live.liveLink.isNotEmpty) {
-          launchUrl(Uri.parse(live.liveLink));
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('No live link available'),
-              backgroundColor: Colors.blue.shade600,
-            ),
-          );
-        }
-      },
-      icon: const Icon(Icons.play_circle_outline),
-      label: const Text('Join'),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.blue.shade600,
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+  Widget _joinButton(BuildContext context, dynamic live) {
+    return SizedBox(
+      width: 80,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          if (live.liveLink.isNotEmpty) {
+            launchUrl(Uri.parse(live.liveLink));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('No live link available'),
+                backgroundColor: Colors.blue.shade600,
+              ),
+            );
+          }
+        },
+        icon: const Icon(Icons.play_circle_outline, size: 18),
+        label: const Text(
+          'Join',
+          style: TextStyle(fontSize: 14),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.blue.shade600,
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(
+            vertical: 8,
+            horizontal: 12,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
       ),
     );
   }
@@ -1017,7 +1082,6 @@ class _ModuleExpansionTileState extends State<ModuleExpansionTile> {
     setState(() {
       isLoading = true;
       errorMessage = null;
-      // Don't clear the lists here to avoid UI flicker if the fetch fails
     });
 
     try {
@@ -1026,7 +1090,13 @@ class _ModuleExpansionTileState extends State<ModuleExpansionTile> {
       // Set the module ID
       provider.setSelectedModuleId(widget.module.moduleId);
 
-      // Fetch content
+      // Show loading state immediately
+      setState(() {
+        isLoading = true;
+        errorMessage = null;
+      });
+
+      // Fetch content in parallel
       await Future.wait([
         _fetchLessonsAndAssignments(provider),
         _fetchQuizzes(provider),
@@ -1045,7 +1115,7 @@ class _ModuleExpansionTileState extends State<ModuleExpansionTile> {
       if (mounted) {
         setState(() {
           isLoading = false;
-          errorMessage = 'Unable to load content. Please try again.';
+          errorMessage = 'Failed to load content. Please check your connection and try again.';
         });
       }
     }
@@ -1056,7 +1126,8 @@ class _ModuleExpansionTileState extends State<ModuleExpansionTile> {
       await provider.StudentfetchLessonsAndAssignmentsquiz();
     } catch (e) {
       print('Error fetching lessons and assignments: $e');
-      // Don't throw here - we want to continue even if one fetch fails
+      // We'll handle the error in the parent method
+      rethrow;
     }
   }
 
@@ -1064,118 +1135,246 @@ class _ModuleExpansionTileState extends State<ModuleExpansionTile> {
     try {
       await provider.StudentfetchliveForSelectedCourse();
     } catch (e) {
-      print('Error fetching live content: $e');
-      // Don't throw here - we want to continue even if one fetch fails
+      print('Error fetching quizzes: $e');
+      // We'll handle the error in the parent method
+      rethrow;
     }
   }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildSectionHeader(String title, int count, IconData icon) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      decoration: BoxDecoration(
+        color: Colors.blue.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: Colors.blue[700], size: 24),
+          const SizedBox(width: 12),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: Colors.blue[900],
+            ),
+          ),
+          const Spacer(),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.blue.withOpacity(0.3)),
+            ),
+            child: Text(
+              count.toString(),
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue[700],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContentItem({
+    required String title,
+    required String content,
+    required IconData icon,
+    required String buttonText,
+    required VoidCallback onPressed,
+    required Color accentColor,
+  }) {
+    return Container(
       padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFEEEEEE)),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE0E0E0)),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.15),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Module Header
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 48,
-                height: 48,
+                padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.blueAccent,
-                    width: 3,
-                  ),
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.blueAccent.withOpacity(0.3),
-                      Colors.white.withOpacity(0.6)
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: accentColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                child: Center(
-                  child: Text(
-                    (lessons.length + assignments.length + quizzes.length)
-                        .toString(),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent,
-                    ),
-                  ),
-                ),
+                child: Icon(icon, color: accentColor, size: 20),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  widget.module.title ?? 'No title available',
+                  title,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
               ),
-              IconButton(
-                icon: Icon(
-                  isExpanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  color: const Color(0xFF666666),
+              ElevatedButton(
+                onPressed: onPressed,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: accentColor,
+                  foregroundColor: Colors.white,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    isExpanded = !isExpanded;
-                    if (isExpanded &&
-                        lessons.isEmpty &&
-                        assignments.isEmpty &&
-                        quizzes.isEmpty) {
-                      loadModuleContent();
-                    }
-                  });
-                },
+                child: Text(
+                  buttonText,
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                ),
               ),
             ],
           ),
+          if (content.isNotEmpty) ...[
+            const SizedBox(height: 12),
+            Text(
+              content,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Colors.black54,
+                height: 1.5,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color(0xFFEEEEEE)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          // Module Header
+          InkWell(
+            onTap: () {
+              setState(() {
+                isExpanded = !isExpanded;
+                if (isExpanded &&
+                    lessons.isEmpty &&
+                    assignments.isEmpty &&
+                    quizzes.isEmpty) {
+                  loadModuleContent();
+                }
+              });
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [Colors.blue[700]!, Colors.blue[500]!],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        (lessons.length + assignments.length + quizzes.length)
+                            .toString(),
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.module.title ?? 'No title available',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${lessons.length} Lessons • ${assignments.length} Assignments • ${quizzes.length} Quizzes',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Icon(
+                    isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    color: Colors.grey[600],
+                    size: 28,
+                  ),
+                ],
+              ),
+            ),
+          ),
           if (isExpanded) ...[
-            const SizedBox(height: 16),
-            const Divider(color: Color(0xFFEEEEEE)),
+            const Divider(height: 1),
             if (isLoading)
-              const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: CircularProgressIndicator(),
-                ),
+              const Padding(
+                padding: EdgeInsets.all(24),
+                child: Center(child: CircularProgressIndicator()),
               )
             else if (errorMessage != null)
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(24),
                   child: Column(
                     children: [
                       Text(
                         errorMessage!,
                         style: const TextStyle(color: Colors.red),
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 12),
                       ElevatedButton(
                         onPressed: loadModuleContent,
                         child: const Text('Retry'),
@@ -1185,158 +1384,108 @@ class _ModuleExpansionTileState extends State<ModuleExpansionTile> {
                 ),
               )
             else if (lessons.isEmpty && assignments.isEmpty && quizzes.isEmpty)
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.inbox_outlined,
-                        size: 48,
-                        color: Colors.grey[400],
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.inbox_outlined,
+                      size: 48,
+                      color: Colors.grey[400],
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      'No content available for this module yet',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[600],
+                        fontWeight: FontWeight.w500,
                       ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'No content available for this module yet',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600],
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               )
             else
-              Column(
-                children: [
-                  ...lessons.map((lesson) => _buildExpandedContent(
-                        title: lesson.title,
-                        content: lesson.content,
-                        icon: Icons.book_outlined,
-                        buttonText: "View Lesson",
-                        onPressed: () async {
-                          final Uri url = Uri.parse(lesson.videoLink);
-                          if (await canLaunchUrl(url)) {
-                            await launchUrl(url,
-                                mode: LaunchMode.externalApplication);
-                          }
-                        },
-                      )),
-                  ...assignments.map((assignment) => _buildExpandedContent(
-                        title: assignment.title,
-                        content: assignment.description,
-                        icon: Icons.assignment_outlined,
-                        buttonText: "View Assignment",
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AssignmentSubmissionPage(
-                                  assignment: assignment),
-                            ),
-                          );
-                        },
-                      )),
-                  ...quizzes.map((quiz) => _buildExpandedContent(
-                        title: quiz.name,
-                        content: quiz.description,
-                        icon: Icons.quiz_outlined,
-                        buttonText: "Start Quiz",
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  QuizDetailScreen(quiz: quiz),
-                            ),
-                          );
-                        },
-                      )),
-                ],
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    if (lessons.isNotEmpty) ...[
+                      _buildSectionHeader(
+                        'Lessons',
+                        lessons.length,
+                        Icons.book_outlined,
+                      ),
+                      const SizedBox(height: 12),
+                      ...lessons.map((lesson) => _buildContentItem(
+                            title: lesson.title,
+                            content: lesson.content,
+                            icon: Icons.play_circle_outline,
+                            buttonText: "Watch Lesson",
+                            accentColor: Colors.blue,
+                            onPressed: () async {
+                              final Uri url = Uri.parse(lesson.videoLink);
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url,
+                                    mode: LaunchMode.externalApplication);
+                              }
+                            },
+                          )),
+                      const SizedBox(height: 24),
+                    ],
+                    if (assignments.isNotEmpty) ...[
+                      _buildSectionHeader(
+                        'Assignments',
+                        assignments.length,
+                        Icons.assignment_outlined,
+                      ),
+                      const SizedBox(height: 12),
+                      ...assignments.map((assignment) => _buildContentItem(
+                            title: assignment.title,
+                            content: assignment.description,
+                            icon: Icons.edit_note,
+                            buttonText: "View Assignment",
+                            accentColor: Colors.orange,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AssignmentSubmissionPage(
+                                      assignment: assignment),
+                                ),
+                              );
+                            },
+                          )),
+                      const SizedBox(height: 24),
+                    ],
+                    if (quizzes.isNotEmpty) ...[
+                      _buildSectionHeader(
+                        'Quizzes',
+                        quizzes.length,
+                        Icons.quiz_outlined,
+                      ),
+                      const SizedBox(height: 12),
+                      ...quizzes.map((quiz) => _buildContentItem(
+                            title: quiz.name,
+                            content: quiz.description,
+                            icon: Icons.check_circle_outline,
+                            buttonText: "Start Quiz",
+                            accentColor: Colors.green,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      QuizDetailScreen(quiz: quiz),
+                                ),
+                              );
+                            },
+                          )),
+                    ],
+                  ],
+                ),
               ),
           ],
-        ],
-      ),
-    );
-  }
-
-  Widget _buildExpandedContent({
-    required String title,
-    required String content,
-    required IconData icon,
-    required String buttonText,
-    required VoidCallback onPressed,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.only(top: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
-          ),
-        ],
-        border: Border.all(color: const Color(0xFFE0E0E0)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.blueAccent.withOpacity(0.2),
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(12),
-            child: Icon(icon, color: Colors.blueAccent, size: 28),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  content,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black54,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ElevatedButton(
-            onPressed: onPressed,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blueAccent,
-              foregroundColor: Colors.white,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            child: Text(
-              buttonText,
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-            ),
-          ),
         ],
       ),
     );

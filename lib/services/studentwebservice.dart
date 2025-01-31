@@ -302,4 +302,32 @@ class StudentAPI {
       throw Exception('Error fetching notification live session: $e');
     }
   }
+
+  Future<UserProfileResponse> fetchUserProfile(String token, int userId) async {
+    final url = Uri.parse('$baseUrl/getProfile/$userId');
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      print('Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = jsonDecode(response.body);
+        return UserProfileResponse.fromJson(data);
+      } else {
+        throw Exception('Failed to fetch user profile: ${response.body}');
+      }
+    } catch (e) {
+      print('Error in API call: $e');
+      rethrow;
+    }
+  }
+
 }
